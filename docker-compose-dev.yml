@@ -1,0 +1,72 @@
+version: "3"
+
+networks:
+  proxy:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+  #######################################
+  # nginx
+  #######################################
+  aimesoft_nginx:
+    build: ./services/nginx
+    container_name: aimesoft_nginx
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - 80:80
+    networks:
+      - proxy
+
+  #######################################
+  # laravel
+  #######################################
+  aimesoft_backend:
+    build:
+      context: ./services/backend/docker
+      dockerfile: dev.Dockerfile
+    container_name: aimesoft_backend
+    environment:
+      - VIRTUAL_HOST=aimesoft.laravel.lc
+    volumes:
+      - ./services/backend:/var/www/html
+    depends_on:
+      - aimesoft_backend_db
+    networks:
+      - proxy
+      - backend
+
+  #######################################
+  # mariadb: mariadb for services
+  #######################################
+  aimesoft_backend_db:
+    image: mariadb:10.3.9
+    volumes:
+      - aimesoft-mairiaDB:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=laravel
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3309:3306
+    networks:
+      - backend
+
+  #######################################
+  # vue
+  #######################################
+  aimesoft_fontend:
+    build:
+      context: ./services/fontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./services/fontend:/usr/src/app
+      - /user/src/app/node_modules
+    ports:
+      - 7719:7716
+
+volumes:
+  aimesoft-mairiaDB:
