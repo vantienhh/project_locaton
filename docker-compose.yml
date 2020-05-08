@@ -44,6 +44,18 @@ services:
       - backend
 
   #######################################
+  # redis: redis queue
+  #######################################
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
+  #######################################
   # vue
   #######################################
   aimesoft_fontend:
@@ -58,3 +70,4 @@ services:
 
 volumes:
   aimesoft-mairiaDB:
+  redis:

@@ -16,6 +16,7 @@ function loadAppModules() {
 }
 
 let appModules = loadAppModules()
+
 export default {
   path: '/',
   component: () => import('@/Home'),
@@ -23,8 +24,12 @@ export default {
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('@/view/Dashboard'),
+      component: () => import('@/views/Dashboard'),
+      meta: {
+        title: 'Dashboard',
+        require_auth: true,
+      },
     },
-    ...appModules
-  ]
+    ...appModules,
+  ],
 }
