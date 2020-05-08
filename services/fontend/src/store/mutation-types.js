@@ -1,0 +1,1 @@
+export const SET_INITIAL_STATE = 'APP/SET_INITIAL_STATE'
