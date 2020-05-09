@@ -1,3 +1,8 @@
+import './plugins/vee-validate'
+import './plugins/axiosPlugin'
+import './plugins/cookie'
+import './plugins/button'
+
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'

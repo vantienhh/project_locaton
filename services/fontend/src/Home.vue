@@ -8,7 +8,7 @@
       <menu-bar/>
     </v-navigation-drawer>
 
-    <v-content>
+    <v-content style="background: #ecebeb">
       <transition>
         <keep-alive>
           <router-view/>

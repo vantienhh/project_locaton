@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
     {
         if (!User::where('email', 'tienhh1994@gmail.com')->first()) {
             User::create([
-                'name'     => 'admin',
+                'name'     => 'Lê Văn Tiến',
                 'password' => bcrypt('admin'),
                 'email'    => 'tienhh1994@gmail.com'
             ]);

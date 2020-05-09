@@ -19,7 +19,9 @@ class ProvinceController extends ApiController
 
     public function index(Request $request)
     {
-        $data = $this->province->getByQuery($request->all(), 20);
+        $limit = $request->get('limit', 20);
+        $data = $this->province->getByQuery($request->all(), $limit);
+        
         return $this->successResponse($data);
     }
 

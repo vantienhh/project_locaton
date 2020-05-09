@@ -19,13 +19,10 @@ class DistrictController extends ApiController
 
     public function index(Request $request)
     {
-        if ($provinceId = $request->get('province_id', null)) {
-            $data = $this->district->getByQuery($request->query(), 20);
-            return $this->successResponse($data);
-        }
+        $limit = $request->get('limit', 20);
+        $data = $this->district->getByQuery($request->query(), $limit);
 
-        $this->setTransformer(false);
-        return $this->successResponse([]);
+        return $this->successResponse($data);
     }
 
     public function getDistrictPopulation(Request $request)

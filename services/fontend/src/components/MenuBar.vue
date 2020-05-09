@@ -1,20 +1,19 @@
 <template>
   <v-list subheader dense class="pa-0">
-    <v-list-item link :to="{path: '/profile'}">
-      <!--      <v-list-item-avatar>-->
-      <!--        <v-avatar>-->
-      <!--          <img-->
-      <!--              :src="user.avatar_path"-->
-      <!--              :alt="user.name"-->
-      <!--          >-->
-      <!--        </v-avatar>-->
-      <!--      </v-list-item-avatar>-->
-
-      <!--      <v-list-item-content>-->
-      <!--        <v-list-item-title>{{user.name}}</v-list-item-title>-->
-      <!--        <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>-->
-      <!--        <v-list-item-subtitle>{{user.phone}}</v-list-item-subtitle>-->
-      <!--      </v-list-item-content>-->
+    <v-list-item>
+<!--      <v-list-item-avatar>-->
+<!--        <v-avatar>-->
+<!--          <img-->
+<!--              :src="user.avatar_path"-->
+<!--              :alt="user.name"-->
+<!--          >-->
+<!--        </v-avatar>-->
+<!--      </v-list-item-avatar>-->
+      <v-list-item-content>
+        <v-list-item-title>{{user.name}}</v-list-item-title>
+        <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{user.phone}}</v-list-item-subtitle>
+      </v-list-item-content>
 
       <v-list-item-action @click.prevent.stop="logout">
         <v-tooltip left>
@@ -38,7 +37,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title>
+          <v-list-item-title class="font-weight-bold">
             {{ item.text }}
           </v-list-item-title>
         </v-list-item-content>
@@ -49,24 +48,31 @@
 </template>
 <script>
 
+  import {mapGetters, mapActions} from 'vuex'
+
   export default {
     name: 'MenuBar',
+    computed: {
+      ...mapGetters('auth', ['user']),
+    },
     data() {
       return {
         mainMenu: [
           {
-            group: 'Tỉnh thành',
+            icon: 'mdi-city-variant-outline',
+            route: {name: 'provinces'},
+            text: 'Tỉnh thành',
           },
           {
-            group: 'Huyện',
+            icon: 'mdi-home-city-outline',
+            route: {name: 'districts'},
+            text: 'Quận/huyện',
           },
         ],
       }
     },
     methods: {
-      logout() {
-
-      },
+      ...mapActions('auth', ['logout']),
     },
   }
 </script>
