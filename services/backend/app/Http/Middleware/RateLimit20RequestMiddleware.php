@@ -3,12 +3,12 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\RateLimitedException;
-use App\Services\RateLimitRequest;
+use App\Services\RateLimit20Request;
 use App\Services\RateLimitRequestInterFace;
 use Illuminate\Http\Request;
 use Closure;
 
-class RateLimitMiddleware
+class RateLimit20RequestMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,10 +21,8 @@ class RateLimitMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         try {
-            if ($rateLimitRequest = $this->getServiceRateLimitRequest($request)->checkRateLimited()) {
-                $rateLimitRequest->setRateLimitRequest();
-                return $next($request);
-            }
+            $this->getServiceRateLimitRequest($request)->checkRateLimited();
+            return $next($request);
         } catch (RateLimitedException $e) {
             return response()->json(['message' => 'Enhance Your Calm'], 420);
         }
@@ -32,6 +30,6 @@ class RateLimitMiddleware
 
     public function getServiceRateLimitRequest(Request $request): RateLimitRequestInterFace
     {
-        return new RateLimitRequest($request);
+        return new RateLimit20Request($request);
     }
 }
