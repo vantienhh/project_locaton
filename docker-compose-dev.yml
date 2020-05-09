@@ -2,24 +2,12 @@ version: "3"
 
 networks:
   proxy:
-    driver: bridge
+    external:
+      name: nginx-proxy
   backend:
     driver: bridge
 
 services:
-  #######################################
-  # nginx
-  #######################################
-  aimesoft_nginx:
-    build: ./services/nginx
-    container_name: aimesoft_nginx
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    ports:
-      - 80:80
-    networks:
-      - proxy
-
   #######################################
   # laravel
   #######################################
@@ -39,18 +27,6 @@ services:
       - backend
 
   #######################################
-  # redis: redis queue
-  #######################################
-  redis:
-    image: redis:alpine
-    volumes:
-      - redis:/data
-    ports:
-      - 6379:6379
-    networks:
-      - backend
-
-  #######################################
   # mariadb: mariadb for services
   #######################################
   aimesoft_backend_db:
@@ -64,6 +40,18 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - 3309:3306
+    networks:
+      - backend
+
+  #######################################
+  # redis: redis queue
+  #######################################
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379:6379
     networks:
       - backend
 
