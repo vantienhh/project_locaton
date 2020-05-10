@@ -14,9 +14,9 @@
       :options.sync="options"
       class="pagination-table"
   >
-    <!-- actions -->
-    <template v-slot:item.actions="{ item }">
-      <action-bar :item="item"/>
+    <!-- population -->
+    <template v-slot:item.population="{ item }">
+      <population :item="item"/>
     </template>
   </v-data-table>
 </template>
@@ -24,12 +24,12 @@
 <script>
   import {pick} from 'lodash'
   import {mapGetters, mapActions} from 'vuex'
-  import ActionBar from './ActionBar'
+  import Population from './Population'
 
   export default {
     name: 'ProvincePaginateTable',
     components: {
-      ActionBar,
+      Population,
     },
     data() {
       return {
@@ -39,8 +39,7 @@
         },
         headers: [
           {text: 'Tên thành phố', value: 'name', sortable: false},
-          {text: 'Ngày tạo', value: 'created_at', sortable: false},
-          {text: 'Hành động', value: 'actions', width: '40%', sortable: false},
+          {text: 'Dân số', value: 'population', width: '40%', sortable: false}
         ],
       }
     },

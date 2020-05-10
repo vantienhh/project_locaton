@@ -18,8 +18,7 @@ class DistrictTransformer extends TransformerAbstract
 
         return [
             'id'         => $district->id,
-            'name'       => $district->name,
-            'created_at' => $district->created_at->format('d-m-Y H:i:s'),
+            'name'       => $district->name
         ];
     }
 }

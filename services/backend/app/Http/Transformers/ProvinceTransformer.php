@@ -18,8 +18,7 @@ class ProvinceTransformer extends TransformerAbstract
 
         return [
             'id'         => $province->id,
-            'name'       => $province->name,
-            'created_at' => $province->created_at->format('d-m-Y H:i:s'),
+            'name'       => $province->name
         ];
     }
 }
