@@ -1,6 +1,7 @@
 <template>
   <div>
     <span v-if="population"><strong>{{population}}</strong> người</span>
+    <v-icon v-else>mdi-spin mdi-reload</v-icon>
   </div>
 </template>
 
