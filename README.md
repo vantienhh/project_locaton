@@ -1,4 +1,4 @@
-## 1/ Cài docker
+## 1/ Cài docker, docker composer
 
 ## 2/ setup môi trường
 #### - env:
@@ -7,6 +7,10 @@ cp services/backend/.env.example services/backend/.env
 ```
 ```
 cp services/fontend/.env.example services/fontend/.env
+```
+#### - chạy docker composer
+```
+docker-compose up
 ```
 #### - chmod:
 ```$xslt
