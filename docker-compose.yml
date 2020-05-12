@@ -28,8 +28,8 @@ services:
       context: ./services/backend/docker
       dockerfile: dev.Dockerfile
     container_name: aimesoft_backend
-    environment:
-      - VIRTUAL_HOST=aimesoft.laravel.lc
+    ports:
+      - 9432:80
     volumes:
       - ./services/backend:/var/www/html
     depends_on:
